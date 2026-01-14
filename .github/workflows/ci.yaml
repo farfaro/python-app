@@ -25,7 +25,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - 
         name: Get short SHA
-        run: echo "SHORT_SHA=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+        run: 
+          - echo "SHORT_SHA=$(echo ${{ github.sha }}) | cut -c1-6"
+          - echo $SHORT_SHA
       -
         name: Build and push
         uses: docker/build-push-action@v6
